@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Henry的博客</title>
-  <subtitle>欢迎来到Henry的博客，希望与您在iOS开发领域共同交流与学习</subtitle>
+  <subtitle>有理想的人，生活总是火热的</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-01T05:49:46.000Z</updated>
+  <updated>2017-03-01T10:10:58.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,30 +16,102 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>图片测试</title>
-    <link href="http://yoursite.com/2017/03/01/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/"/>
-    <id>http://yoursite.com/2017/03/01/图片测试/</id>
-    <published>2017-03-01T03:42:59.000Z</published>
-    <updated>2017-03-01T05:49:46.000Z</updated>
+    <title>iOS之UI--CAShapeLayer</title>
+    <link href="http://yoursite.com/2017/03/01/iOS%E4%B9%8BUI-CAShapeLayer/"/>
+    <id>http://yoursite.com/2017/03/01/iOS之UI-CAShapeLayer/</id>
+    <published>2017-03-01T09:07:36.000Z</published>
+    <updated>2017-03-01T10:10:58.000Z</updated>
     
-    <content type="html"><![CDATA[<p>仅仅是图片测试<img src="/2017/03/01/图片测试/background.jpg" alt="标题"></p>
-<h1 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h1><h2 id="二阶标题"><a href="#二阶标题" class="headerlink" title="二阶标题"></a>二阶标题</h2><h3 id="三阶标题"><a href="#三阶标题" class="headerlink" title="三阶标题"></a>三阶标题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">代码块</div><div class="line">cxjv</div></pre></td></tr></table></figure>
-<pre><code>Header 1
-========
-
-Header 2
---------
-</code></pre>]]></content>
+    <content type="html"><![CDATA[<h3 id="内容大纲："><a href="#内容大纲：" class="headerlink" title="内容大纲："></a>内容大纲：</h3><pre><code>1. CAShapeLayer简介
+2. 贝塞尔曲线与CAShapeLayer的关系
+3. strokeStart和strokeEnd 动画
+4. 用CAShapeLayer实现进度条效果，以及更加复杂的效果
+</code></pre><h2 id="1-CAShapeLayer简介"><a href="#1-CAShapeLayer简介" class="headerlink" title="1.CAShapeLayer简介"></a>1.CAShapeLayer简介</h2><ul>
+<li>CAShapeLayer继承自CALayer，可以使用CALayer的所有属性值</li>
+<li>CAShapeLayer需要与贝塞尔曲线配合使用才有意义</li>
+<li>使用CAShapeLayer与贝塞尔曲线可以实现不在view的drawRect方法中画出有一些想要的图形</li>
+<li>CAShapeLayer属于CoreAnimation框架，其动画渲染直接提交到手机的GPU当中，相较于view的drawRect方法使用CPU渲染而言，其效率极高，能大大优化内存使用情况。</li>
+<li>个人经验：可以重写UIView的子类中的drawRect来实现进度条效果，但是UIView的drawRect是用CPU渲染实现的，而使用CAShapeLayer效率更高，因为它用的是GPU渲染。话不多说直接贴代码<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_1.png" alt=""><br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_2.png" alt=""><br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_3.png" alt=""><br>效果：<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_4.gif" alt=""><br>虽然说，直接更改另外创建的CALayer以及其子类，会触发隐式动画，但是直接更改CAShapeLayer的path的值，变化过程没有渐变移动的效果，所以这里就需要<br>使用核心动画CABasicAnimation来帮忙实现，未使用核心动画验证效果在后面验证。</li>
+</ul>
+<h2 id="2-贝塞尔曲线与CAShapeLayer的关系"><a href="#2-贝塞尔曲线与CAShapeLayer的关系" class="headerlink" title="2.贝塞尔曲线与CAShapeLayer的关系"></a>2.贝塞尔曲线与CAShapeLayer的关系</h2><ul>
+<li>1、CAShapeLayer中有Shape这个单词，顾名思义，它需要一个形状才能生效</li>
+<li>2、贝塞尔曲线可以创建基于矢量的路径</li>
+<li>3、贝塞尔曲线给CAShapeLayer提供路径，CAShapeLayer在提供的路径中进行渲染，路径会闭环，所以路径绘制出了Shape</li>
+<li>4、用于CAShapeLayer的贝塞尔曲线做为path，其path实一个首尾相接的闭环的曲线，即使该贝塞尔曲线不是一个闭环的曲线</li>
+</ul>
+<h4 id="如何建立贝塞尔曲线和CAShapeLayer的联系："><a href="#如何建立贝塞尔曲线和CAShapeLayer的联系：" class="headerlink" title="如何建立贝塞尔曲线和CAShapeLayer的联系："></a>如何建立贝塞尔曲线和CAShapeLayer的联系：</h4><ul>
+<li>类:CAShapeLayer</li>
+<li><p>属性:path</p>
+<ul>
+<li>值:可以是贝塞尔曲线对象<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">UIBezierPath *circle = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0,0,200,100)];</div><div class="line">shape.path = circle.CGPath;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>属性：fillColor 修改贝塞尔曲线的填充颜色</p>
+<ul>
+<li>值：CGColor对象</li>
+</ul>
+</li>
+<li>属性：maskToBounds <ul>
+<li>值：YES 会让超出CAShapeLayer的部分不会显示</li>
+</ul>
+</li>
+</ul>
+<p>一阶贝塞尔曲线<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_5.gif" alt=""></p>
+<p>二阶贝塞尔曲线<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_6.gif" alt=""></p>
+<p>三阶贝塞尔曲线<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_7.gif" alt=""></p>
+<p>四阶贝塞尔曲<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_8.gif" alt=""></p>
+<p>五阶贝塞尔曲线<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_9.gif" alt=""></p>
+<p>然后是通过代码直接体现贝塞尔曲线和CAShapeLayer之间的关系：<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_10.png" alt=""></p>
+<h2 id="3、strokeStart与strokeEnd动画"><a href="#3、strokeStart与strokeEnd动画" class="headerlink" title="3、strokeStart与strokeEnd动画"></a>3、strokeStart与strokeEnd动画</h2><ul>
+<li>1、将ShapeLayer的fillColor设置成透明背景</li>
+<li>2、设置线条的宽度（lineWidth）的值</li>
+<li>3、设置线条的颜色</li>
+<li>4、将strokeStart值设定成0，然后让strokeEnd的值变化触发隐式动画</li>
+<li><p>类：CAShapeLayer</p>
+<ul>
+<li><p>属性：</p>
+<ul>
+<li>strokeStart</li>
+<li>strokeEnd<ul>
+<li>注意 ：strokeEnd的值一定要比strokeStart的大</li>
+<li>范围 ：(0~1)</li>
+<li>处理方法：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">shapeLayer.strokeStart = valueOne &lt; valueTwo ? valueOne : valueTwo;</div><div class="line">shapeLayer.strokeStart = valueOne &gt; valueTwo ? valueOne : valueTwo;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>属性：</p>
+<ul>
+<li>lineWidth 线条的宽度</li>
+<li>strokeColor 线条的颜色 </li>
+<li>值：CGColor</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_11.png" alt=""></p>
+<p>然后为了能实现圆形进度条的效果：</p>
+<p><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_12.png" alt=""></p>
+<p>效果就是：</p>
+<p><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_13.gif" alt=""></p>
+<p>将上面的strokeStart也设置，但是注意：strokeStart必须要小于strokeEnd，否则会不画出线的情况。<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_14.png" alt=""></p>
+<p>###<br><img src="/2017/03/01/iOS之UI-CAShapeLayer/pic_15.gif" alt=""></p>
+<p>综合示例源码请看：<a href="https://github.com/HeYang123456789/UIView" target="_blank" rel="external">源码</a></p>
+]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;仅仅是图片测试&lt;img src=&quot;/2017/03/01/图片测试/background.jpg&quot; alt=&quot;标题&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;标题&quot;&gt;&lt;a href=&quot;#标题&quot; class=&quot;headerlink&quot; title=&quot;标题&quot;&gt;&lt;/a&gt;标题&lt;/h1&gt;&lt;h2 id
+      &lt;h3 id=&quot;内容大纲：&quot;&gt;&lt;a href=&quot;#内容大纲：&quot; class=&quot;headerlink&quot; title=&quot;内容大纲：&quot;&gt;&lt;/a&gt;内容大纲：&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;1. CAShapeLayer简介
+2. 贝塞尔曲线与CAShapeLayer的关系
+3. stro
     
     </summary>
     
     
-      <category term="测试" scheme="http://yoursite.com/tags/%E6%B5%8B%E8%AF%95/"/>
+      <category term="iOS开发" scheme="http://yoursite.com/tags/iOS%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
