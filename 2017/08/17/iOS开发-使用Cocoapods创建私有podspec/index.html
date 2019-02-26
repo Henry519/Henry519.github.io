@@ -148,8 +148,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">创建并设置一个私有的Spec Repo。</div><div class="line">创建Pod的所需要的项目工程文件，并且有可访问的项目版本控制地址。</div><div class="line">创建Pod所对应的podspec文件。</div><div class="line">本地测试配置好的podspec文件是否可用。</div><div class="line">向私有的Spec Repo中提交podspec。</div><div class="line">在个人项目中的Podfile中增加刚刚制作的好的Pod并使用。</div><div class="line">更新维护podspec。</div></pre></td></tr></table></figure>
 <p>在这一系列的步骤中需要创建两个Git仓库，分别是第一步和第二步（第二步不一定非要是Git仓库，只要是可以获取到相关代码文件就可以，也可以是SVN的，也可以说zip包，区别就是在podspec中的source项填写的内容不同），<strong>并且第一步只是在初次创建私有podspec时才需要</strong>，之后在创建其他的只需要从第二步开始就可以。本文只介绍在Git环境下的操作，其他环境其他方式暂不说明。</p>
 <blockquote>
-<p>###创建私有Spec Repo</p>
-</blockquote>
+<h3 id="创建私有Spec-Repo"><a href="#创建私有Spec-Repo" class="headerlink" title="创建私有Spec Repo"></a>创建私有Spec Repo</h3></blockquote>
 <p>先来说第一步，什么是Spec Repo？他是所有的Pods的一个索引，就是一个容器，所有公开的Pods都在这个里面，他实际是一个Git仓库remote端在GitHub上，但是当你使用了Cocoapods后他会被clone到本地的~/.cocoapods/repos目录下，可以进入到这个目录看到master文件夹就是这个官方的Spec Repo了。这个master目录的结构是这个样子的</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── Specs</div><div class="line">    └── [SPEC_NAME]</div><div class="line">        └── [VERSION]</div><div class="line">            └── [SPEC_NAME].podspec</div></pre></td></tr></table></figure>
 <p>因此我们需要创建一个类似于master的私有Spec Repo，这里我们可以fork官方的Repo，也可以自己创建，个人建议不fork，因为你只是想添加自己的Pods，没有必要把现有的公开Pods都copy一份。所以创建一个 Git仓库，这个仓库你可以创建私有的也可以创建公开的，不过既然私有的Spec Repo，还是创建私有的仓库吧，需要注意的就是如果项目中有其他同事共同开发的话，你还要给他这个Git仓库的权限。因为GitHub的私有仓库是收费的，我还不是GitHub的付费用户，所以我使用了其他Git服务，我使用的是开源中国，当然还有其他的可供选择Coding、Bitbucket以及CSDN。创建完成之后在Terminal中执行如下命令：</p>
@@ -157,8 +156,7 @@
 <p>此时如果成功的话进入到~/.cocoapods/repos目录下就可以看到HXSpecs这个目录了。至此第一步创建私有Spec Repo完成。</p>
 <p>PS：上述代码只需要在第一次创建私有Spec Repo的时候用到，之后你每次创建其他私有Pod项目只需要从下面的步骤开始。如果有其他合作人员共同使用这个私有Spec Repo的话在他有对应Git仓库的权限的前提下执行相同的命令添加这个Spec Repo即可。</p>
 <blockquote>
-<p>####创建Pod项目工程文件</p>
-</blockquote>
+<h4 id="创建Pod项目工程文件"><a href="#创建Pod项目工程文件" class="headerlink" title="创建Pod项目工程文件"></a>创建Pod项目工程文件</h4></blockquote>
 <p>这一步就跟创建共有Pod项目一样了，首先要创建一个项目托管仓库，共有私有都可以，这里我们还是在开源中国上创建一个名为HRCargary的私有仓库</p>
 <p><img src="/2017/08/17/iOS开发-使用Cocoapods创建私有podspec/01.png" alt=""></p>
 <p>然后我们把项目克隆岛本地，执行命令</p>
@@ -170,8 +168,7 @@
 <p>因为podspec文件中获取Git版本控制的项目还需要tag号，所以我们要打上一个tag</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git tag &apos;1.2.2&apos;</div><div class="line">$ git push --tags</div></pre></td></tr></table></figure>
 <blockquote>
-<p>###创建Pod所对应的podspec文件。</p>
-</blockquote>
+<h3 id="创建Pod所对应的podspec文件。"><a href="#创建Pod所对应的podspec文件。" class="headerlink" title="创建Pod所对应的podspec文件。"></a>创建Pod所对应的podspec文件。</h3></blockquote>
 <p>打开终端定位到克隆的文件夹</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cd /Users/WanYin/Desktop/hr/HRCargary</div></pre></td></tr></table></figure>
 <p>然后执行命令</p>
@@ -189,8 +186,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-&gt; HRCargary (1.2.2)</div><div class="line">    - WARN  | url: The URL (https://gitee.com/null_536_3468/HRCargary) is not reachable.</div><div class="line">Analyzed 1 podspec.</div><div class="line">HRCargary.podspec passed validation.</div></pre></td></tr></table></figure>
 <p>说明验证通过了，不过这只是这个podspec文件是合格的。WARN可以不用管。</p>
 <blockquote>
-<p>###向私有的Spec Repo中提交podspec</p>
-</blockquote>
+<h3 id="向私有的Spec-Repo中提交podspec"><a href="#向私有的Spec-Repo中提交podspec" class="headerlink" title="向私有的Spec Repo中提交podspec"></a>向私有的Spec Repo中提交podspec</h3></blockquote>
 <p>向Spec Repo提交podspec需要完成两点一个是podspec必须通过验证无误，在一个就是删掉无用的注释（这个不是必须的，为了规范还是删掉吧）。 向我们的私有Spec Repo提交podspec只需要一个命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod repo push HXSpecs HRCargary.podspec  #前面是本地Repo名字 后面是podspec名字</div></pre></td></tr></table></figure>
 <p>完成之后这个组件库就添加到我们的私有Spec Repo中了，可以进入到~/.cocoapods/repos/HXSpecs目录下查看</p>
@@ -201,8 +197,7 @@
 <p>接下来我们在项目里可以这样使用私有库组件，在Podfile里增加</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos;</div><div class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</div><div class="line">#这里就是你的私有Spec Repo</div><div class="line">source &apos;https://gitee.com/null_536_3468/HXSpecs.git&apos;</div><div class="line">target :test do</div><div class="line">    pod &apos;HRCargary&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
 <blockquote>
-<p>###更新维护podspec</p>
-</blockquote>
+<h3 id="更新维护podspec"><a href="#更新维护podspec" class="headerlink" title="更新维护podspec"></a>更新维护podspec</h3></blockquote>
 <p>最后再来说一下制作好的podspec文件后续的更新维护工作，比如如何添加新的版本，如何删除Pod。</p>
 <p>我已经制作好了HRCargary的1.2.2版本，现在我对他进行升级工作，这次我添加了更多的模块到HRCargary之中，包括工具类，底层Model及UIKit扩展等，这里又尝试了一下subspec功能，给HRCargary创建了多个子分支。</p>
 <p>具体做法是先将源文件添加到HRCargary中，然后按照不同的模块对文件目录进行整理，因为我有2个模块，所以在HRCargary下有创建了2个子目录，完成之后继续编辑之前的HRCargary.podspec，这次增加了subspec特性,先看一下HRCargary的文件目录</p>
