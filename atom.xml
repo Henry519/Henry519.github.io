@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-26T10:46:47.781Z</updated>
+  <updated>2019-02-26T12:21:12.641Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2018/05/26/Python%E5%AE%9E%E8%B7%B5%E4%BA%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     <id>http://yoursite.com/2018/05/26/Python实践二数据分析/</id>
     <published>2018-05-26T03:29:33.000Z</published>
-    <updated>2019-02-26T10:46:47.781Z</updated>
+    <updated>2019-02-26T12:21:12.641Z</updated>
     
     <content type="html"><![CDATA[<p>写这篇文章的起因是我一个朋友发表博士论文中要对采集的数据进行分析拟合，自然就想到身为程序猿的我了，本人本着无私奉献的精神及哥们义气，就帮了这个忙啦，😁（装逼结束进入正题）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">需求一：根据公式计算MVD、MDN</div><div class="line">MND计算公式：[Σ(Bin Diameter*Num)]/Σnum</div><div class="line">MVD计算公式：ΣVolum/Σnum=4/3*pi*r^3</div><div class="line">计算结果写入Excel表中</div><div class="line">需求二：通道合并及对数正态分布拟合（这个是什么我也不懂，反正就根据公式进行拟合吧）</div></pre></td></tr></table></figure>
@@ -48,7 +48,7 @@
 <p><img src="/2018/05/26/Python实践二数据分析/04.png" alt=""></p>
 <p>单个文件处理完成，剩下的就是for循环处理7000个文件了，<strong><a href="https://github.com/Henry519/PythonDataProcess" target="_blank" rel="external">源代码</a></strong>已上传至GitHub。至此需求一已经完成，接下来处理需求二。</p>
 <blockquote>
-<p>###需求二</p>
+<p>需求二</p>
 </blockquote>
 <p>在需求一的处理好的数据基础上首先按要求进行通道合并</p>
 <p><img src="/2018/05/26/Python实践二数据分析/05.png" alt=""></p>
@@ -102,7 +102,7 @@
     <link href="http://yoursite.com/2018/03/26/Python%E5%BA%94%E7%94%A8%E4%B8%80%E5%B0%86%E7%BD%91%E9%A1%B5%E8%BD%AC%E6%8D%A2%E4%B8%BApdf%E7%94%B5%E5%AD%90%E4%B9%A6/"/>
     <id>http://yoursite.com/2018/03/26/Python应用一将网页转换为pdf电子书/</id>
     <published>2018-03-26T06:06:27.000Z</published>
-    <updated>2019-02-26T10:33:34.555Z</updated>
+    <updated>2019-02-26T12:22:13.242Z</updated>
     
     <content type="html"><![CDATA[<p>本人是个”收集狂”(不要想歪了哈，我只是喜欢收藏技术贴)，遇到好的东西就喜欢收藏或记录下来，尤其是好的技术文章或者工具。这里就要提到廖雪峰老师的官方网站了，廖老师写的Python、JavaScript、Git教程真心好呀，每每都要去逛逛。于是就有了今天这个需求，把廖老师的教程由网页转为PDF电子书，这样就可以随时随地离线学习加收藏了。说到这里进入今天的主题<strong>Python爬虫实践：将网页转换为pdf电子书</strong></p>
 <p>写爬虫似乎没有比用 Python 更合适了，Python 社区提供的爬虫工具多得让你眼花缭乱，各种拿来就可以直接用的 library 分分钟就可以写出一个爬虫出来，今天就琢磨着写一个爬虫，将廖雪峰的 Python 教程 爬下来做成 PDF 电子书方便离线阅读。</p>
@@ -140,8 +140,7 @@
 <p><img src="/2018/03/26/Python应用一将网页转换为pdf电子书/04.png" alt=""></p>
 <p>生成PDF文件</p>
 <p><img src="/2018/03/26/Python应用一将网页转换为pdf电子书/05.png" alt=""></p>
-<p>##<a href="https://github.com/Henry519/PythonCrawler" target="_blank" rel="external">点击下载源码</a></p>
-]]></content>
+<h2 id="点击下载源码"><a href="#点击下载源码" class="headerlink" title="点击下载源码"></a><a href="https://github.com/Henry519/PythonCrawler" target="_blank" rel="external">点击下载源码</a></h2>]]></content>
     
     <summary type="html">
     
