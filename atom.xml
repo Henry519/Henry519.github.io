@@ -102,7 +102,7 @@
     <link href="http://yoursite.com/2018/03/26/Python%E5%BA%94%E7%94%A8%E4%B8%80%E5%B0%86%E7%BD%91%E9%A1%B5%E8%BD%AC%E6%8D%A2%E4%B8%BApdf%E7%94%B5%E5%AD%90%E4%B9%A6/"/>
     <id>http://yoursite.com/2018/03/26/Python应用一将网页转换为pdf电子书/</id>
     <published>2018-03-26T06:06:27.000Z</published>
-    <updated>2019-02-26T12:22:13.242Z</updated>
+    <updated>2019-02-26T12:22:25.894Z</updated>
     
     <content type="html"><![CDATA[<p>本人是个”收集狂”(不要想歪了哈，我只是喜欢收藏技术贴)，遇到好的东西就喜欢收藏或记录下来，尤其是好的技术文章或者工具。这里就要提到廖雪峰老师的官方网站了，廖老师写的Python、JavaScript、Git教程真心好呀，每每都要去逛逛。于是就有了今天这个需求，把廖老师的教程由网页转为PDF电子书，这样就可以随时随地离线学习加收藏了。说到这里进入今天的主题<strong>Python爬虫实践：将网页转换为pdf电子书</strong></p>
 <p>写爬虫似乎没有比用 Python 更合适了，Python 社区提供的爬虫工具多得让你眼花缭乱，各种拿来就可以直接用的 library 分分钟就可以写出一个爬虫出来，今天就琢磨着写一个爬虫，将廖雪峰的 Python 教程 爬下来做成 PDF 电子书方便离线阅读。</p>
