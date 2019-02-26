@@ -70,9 +70,9 @@
             <ul class="navigation">
               <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
             
-              <li class="navigation__item"><a href="/">Archives</a></li>
+              <li class="navigation__item"><a href="public/archives">Archives</a></li>
             
-              <li class="navigation__item"><a href="/">tags</a></li>
+              <li class="navigation__item"><a href="public/tags">tags</a></li>
             
               <li class="navigation__item"><a href="/favourite/time.html">时光机</a></li>
             
@@ -150,8 +150,101 @@
     &hellip;
       </p>
       <div class="post-list__meta"><time datetime="2017-08-17T02:43:27.000Z" class="post-list__meta--date date">2017-08-17</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
-  <a class="tag-link" href="/public/tags/iOS开发/">iOS开发</a>
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
 </span><a class="btn-border-small" href="/2017/08/17/iOS开发-使用Cocoapods创建私有podspec/">继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2017/07/28/iOS开发-RunLoop实例应用/" title="link to post.title">iOS开发-RunLoop实例应用</a></h2>
+      <p class="excerpt">
+    
+      之前看过很多有关RunLoop的文章，其中要么是主要介绍RunLoop的基本概念，要么是主要讲解RunLoop的底层原理，很少用真正的实例来讲解RunLoop的，这其中有大部分原因是由于大家在项目中很少能用到RunLoop吧。基于这种原因，本文中将用很少的篇幅来对基础内容做以介绍，然后主要利用实例来加深大家对RunLoop的理解,本文中的代码已经上传GitHub,大家可以下载查看，有问题欢迎Iss
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2017-07-28T01:25:09.000Z" class="post-list__meta--date date">2017-07-28</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+</span><a class="btn-border-small" href="/2017/07/28/iOS开发-RunLoop实例应用/">继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2017/06/15/iOS开发-浅谈webViewCookie机制/" title="link to post.title">iOS开发-浅谈webViewCookie机制</a></h2>
+      <p class="excerpt">
+    
+      当你访问一个网站时，浏览器都会帮你主动记录下来你访问的站点设置的Cookie，如果 Cookie 存在的话，会把这些信息放在 CookieStorage 容器中共享，当你下次再访问这个站点时，浏览器会拿着上次保存下来了的Cookie继续去请求。同样适用于ASIHTTPRequest,AFNetworking, Webview等,Cookie常用于一些基于认证的网络请求
+
+Cookie简介
+
+Coo
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2017-06-15T02:50:32.000Z" class="post-list__meta--date date">2017-06-15</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+</span><a class="btn-border-small" href="/2017/06/15/iOS开发-浅谈webViewCookie机制/">继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2017/06/06/iOS开发-Safari调试WebView页面/" title="link to post.title">iOS开发-Safari调试WebView页面</a></h2>
+      <p class="excerpt">
+    
+      在iOS开发过程中，难免会加入html5页面来实现文章详情等等类似功能。我们都知道火狐等PC浏览器有类似firebug，审查元素等工具来调试网页样式与脚本，查看请求参数与请求头等等。在iOS开发中，这些网页检查器功能也是存在的（无论是模拟器还是真机），我们需要用到Mac自带的浏览器Safari。所以，本文将讲解使用Safari对iOS程序中的WebView进行调试的小技巧。
+
+1、 打开模拟器/真
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2017-06-06T07:13:30.000Z" class="post-list__meta--date date">2017-06-06</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+</span><a class="btn-border-small" href="/2017/06/06/iOS开发-Safari调试WebView页面/">继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2017/03/06/UUID全解/" title="link to post.title">IOS开发-获取唯一设备标识的方法</a></h2>
+      <p class="excerpt">
+    
+      在开发过程中，我们经常会被要求获取每个设备的唯一标识，以便后台做相应的处理。
+我们来看看有哪些方法来获取设备的唯一标示，然后再分析下这些方法的利弊。具体可分为以下几种：
+1、UDID
+2、UUID
+3、IDFA
+4、IDFV
+4、MAC(已经被禁用，除了5.0以前，哪位大神还在用此等上古神器)
+
+一、UDID
+
+什么是UDIDUDID 「Unique Device Identifier Descr
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2017-03-06T01:26:32.000Z" class="post-list__meta--date date">2017-03-06</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+</span><a class="btn-border-small" href="/2017/03/06/UUID全解/">继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+  
+    
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="/2017/03/01/iOS之UI-CAShapeLayer/" title="link to post.title">iOS之UI-CAShapeLayer</a></h2>
+      <p class="excerpt">
+    
+      内容大纲：1. CAShapeLayer简介
+2. 贝塞尔曲线与CAShapeLayer的关系
+3. strokeStart和strokeEnd 动画
+4. 用CAShapeLayer实现进度条效果，以及更加复杂的效果
+1.CAShapeLayer简介
+CAShapeLayer继承自CALayer，可以使用CALayer的所有属性值
+CAShapeLayer需要与贝塞尔曲线配合使用才有意义
+使用C
+    &hellip;
+      </p>
+      <div class="post-list__meta"><time datetime="2017-03-01T09:07:36.000Z" class="post-list__meta--date date">2017-03-01</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+</span><a class="btn-border-small" href="/2017/03/01/iOS之UI-CAShapeLayer/">继续阅读</a></div>
       <hr class="post-list__divider" />
     </li>
   
