@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>IOS开发-获取唯一设备标识的方法 | Henry的博客</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="ios开发、iOS交流、iOS技术">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="IOS开发-获取唯一设备标识的方法 | Henry的博客">
+    <meta name="twitter:description" content="ios开发、iOS交流、iOS技术">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="IOS开发-获取唯一设备标识的方法 | Henry的博客">
+    <meta property="og:description" content="ios开发、iOS交流、iOS技术">
+
+    
+    <meta name="author" content="Henry">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="Henry的博客" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2017/03/06/UUID全解/"/>
+
+    
+      
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover-road.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Henry的博客 的主页"><img src="/images/avatar_dog.jpg" width="80" alt="Henry的博客 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Henry的博客">Henry的博客</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">有理想的人，生活总是火热的</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到Henry的博客，希望与您在iOS开发领域共同交流与学习</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+            
+              <li class="navigation__item"><a href="/public/archives">Archives</a></li>
+            
+              <li class="navigation__item"><a href="/public/tags">tags</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/Henry519" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-slate"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2017-03-06T01:26:32.000Z" class="post-list__meta--date date">2017-03-06</time> &#8226; <span class="post-meta__tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+ </span>
+      <span class="page-pv">
+      &nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">IOS开发-获取唯一设备标识的方法</h1>
+  </header>
+
+  <section class="post">
+    <pre><code>在开发过程中，我们经常会被要求获取每个设备的唯一标识，以便后台做相应的处理。
+我们来看看有哪些方法来获取设备的唯一标示，然后再分析下这些方法的利弊。具体可分为以下几种：
+1、UDID
+2、UUID
+3、IDFA
+4、IDFV
+4、MAC(已经被禁用，除了5.0以前，哪位大神还在用此等上古神器)
+</code></pre><blockquote>
+<p>一、UDID</p>
+</blockquote>
+<h3 id="什么是UDID"><a href="#什么是UDID" class="headerlink" title="什么是UDID"></a>什么是UDID</h3><p>UDID 「Unique Device Identifier Description」是由子母和数字组成的40个字符串的序号，用来区别每一个唯一的iOS设备，包括 iPhones, iPads, 以及 iPod touches，这些编码看起来是随机的，实际上是跟硬件设备特点相联系的，另外你可以到iTunes，pp助手或itools等软件查看你的udid（设备标识）。</p>
+<p>如下图所示：<img src="/2017/03/06/UUID全解/01.png" alt=""></p>
+<h3 id="UDID是用来干什么的？"><a href="#UDID是用来干什么的？" class="headerlink" title="UDID是用来干什么的？"></a>UDID是用来干什么的？</h3><p>UDID可以关联其它各种数据到相关设备上。例如，连接到开发者账号，可以允许在发布前让设备安装或测试应用；也可以让开发者获得iOS测试版进行体验。苹果用UDID连接到苹果的ID，这些设备可以自动下载和安装从App Store购买的应用、保存从iTunes购买的音乐、帮助苹果发送推送通知、即时消息。 在iOS 应用早期，UDID被第三方应用开发者和网络广告商用来收集用户数据，可以用来关联地址、记录应用使用习惯……以便推送精准广告</p>
+<pre><code>大多数应用都会用到苹果设备的UDID号，UDID通常有以下两种用途：
+
+* 用于一些统计与分析目的；【第三方统计工具如友盟，广告商如ADMOB等。
+
+* 将UDID作为用户ID来唯一识别用户，省去用户名，密码等注册过程。
+</code></pre><h3 id="为什么苹果反对开发人员使用UDID？"><a href="#为什么苹果反对开发人员使用UDID？" class="headerlink" title="为什么苹果反对开发人员使用UDID？"></a>为什么苹果反对开发人员使用UDID？</h3><p>iOS 2.0版本以后UIDevice提供一个获取设备唯一标识符的方法uniqueIdentifier，通过该方法我们可以获取设备的序列号，这个也是目前为止唯一可以确认唯一的标示符。 许多开发者把UDID跟用户的真实姓名、密码、住址、其它数据关联起来；网络窥探者会从多个应用收集这些数据，然后顺藤摸瓜得到这个人的许多隐私数据。同时大部分应用确实在频繁传输UDID和私人信息。 为了避免集体诉讼，苹果最终决定在iOS 5 的时候，将这一惯例废除，开发者被引导生成一个唯一的标识符，只能检测应用程序，其他的信息不提供。<code>现在应用试图获取UDID已被禁止且不允许上架</code>。<br>所以这个方法作废。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//UDID , 已废除</div><div class="line">NSString *udid = [[UIDevice currentDevice] uniqueIdentifier];</div></pre></td></tr></table></figure>
+<blockquote>
+<p>二、UUID</p>
+</blockquote>
+<h3 id="什么是UUID-Universally-Unique-Identifier"><a href="#什么是UUID-Universally-Unique-Identifier" class="headerlink" title="什么是UUID(Universally Unique Identifier)"></a>什么是UUID(Universally Unique Identifier)</h3><p>UUID是Universally Unique Identifier的缩写，中文意思是通用唯一识别码。它是让分布式系统中的所有元素，都能有唯一的辨识资讯，而不需要透过中央控制端来做辨识资讯的指定。这样，每个人都可以建立不与其它人冲突的 UUID。在此情况下，就不需考虑数据库建立时的名称重复问题。苹果公司建议使用UUID为应用生成唯一标识字符串。 </p>
+<p>获得的UUID值系统没有存储, 而且每次调用得到UUID，系统都会返回一个新的唯一标示符。如果你希望存储这个标示符，那么需要自己将其存储到NSUserDefaults, Keychain, Pasteboard或其它地方。目前大部分应用存的是UUID,它是苹果再iOS6后提供的一个获取大随机数的方法。UUID, 全球独立标识(Globally Unique Identifier)，据wiki说UUID随机数算法得到的数重复概率为170亿分之一，170亿分之一什么概念？可以告诉你买一注双色球的中奖概率是1700万分之一。</p>
+<ul>
+<li>CFUUID</li>
+</ul>
+<p>从iOS2.0开始，CFUUID就已经出现了。它是CoreFoundatio包的一部分，因此API属于C语言风格。CFUUIDCreate 方法用来创建CFUUIDRef，并且可以获得一个相应的NSString，如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CFUUIDRef cfuuid = CFUUIDCreate(kCFAllocatorDefault);</div><div class="line">NSString *cfuuidString = (NSString*)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, cfuuid));</div></pre></td></tr></table></figure>
+<p>获得的这个CFUUID值系统并没有存储。每次调用CFUUIDCreate，系统都会返回一个新的唯一标示符。如果你希望存储这个标示符，那么需要自己将其存储到NSUserDefaults, Keychain, Pasteboard或其它地方。</p>
+<ul>
+<li>NSUUID</li>
+</ul>
+<p>NSUUID在iOS 6中才出现，这跟CFUUID几乎完全一样，只不过它是Objective-C接口。+ (id)UUID 是一个类方法，调用该方法可以获得一个UUID。通过下面的代码可以获得一个UUID字符串：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *uuid = [[NSUUID UUID] UUIDString];</div></pre></td></tr></table></figure>
+<p>跟CFUUID一样，这个值系统也不会存储，每次调用的时候都会获得一个新的唯一标示符。如果要存储的话，你需要自己存储。在我读取NSUUID时，注意到获取到的这个值跟CFUUID完全一样（不过也可能不一样）</p>
+<blockquote>
+<p>三、IDFA（identifierForIdentifier）</p>
+</blockquote>
+<h3 id="什么是IDFA"><a href="#什么是IDFA" class="headerlink" title="什么是IDFA"></a>什么是IDFA</h3><p>广告标示符，在同一个设备上的所有App都会取到相同的值，是苹果专门给各广告提供商用来追踪用户而设的。但好在Apple默认是允许追踪的，而且一般用户都不知道有这么个设置，所以基本上用来监测推广效果，是戳戳有余了。<br>它是iOS 6中另外一个新的方法，提供了一个方法advertisingIdentifier，通过调用该方法会返回一个NSUUID实例，最后可以获得一个UUID，由系统存储着的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import &lt;AdSupport/AdSupport.h&gt;</div><div class="line">NSString *adId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];</div></pre></td></tr></table></figure>
+<p>不过即使这是由系统存储的，但是有几种情况下，会重新生成广告标示符。如果用户完全重置系统（(设置程序 -&gt; 通用 -&gt; 还原 -&gt; 还原位置与隐私) ，这个广告标示符会重新生成。另外如果用户明确的还原广告(设置程序-&gt; 通用 -&gt; 关于本机 -&gt; 广告 -&gt; 还原广告标示符) ，那么广告标示符也会重新生成。<br>关于广告标示符的还原，有一点需要注意：如果程序在后台运行，此时用户“还原广告标示符”，然后再回到程序中，此时获取广 告标示符并不会立即获得还原后的标示符。必须要终止程序，然后再重新启动程序，才能获得还原后的广告标示符。<br>所以IDFA也不可以作为获取唯一标识的方法，来识别用户。</p>
+<p>####<code>注意：Appstore禁止不使用广告而采集IDFA的app上架。</code></p>
+<blockquote>
+<p>四、IDFV(identifierForVendor)</p>
+</blockquote>
+<h3 id="什么是IDFV"><a href="#什么是IDFV" class="headerlink" title="什么是IDFV"></a>什么是IDFV</h3><p>Vendor标示符，是给Vendor标识用户用的，每个设备在所属同一个Vender的应用里，都有相同的值。其中的Vender是指应用提供商，但准确点说，是通过BundleID的反转的前两部分进行匹配，如果相同就是同一个Vender，例如对于com.taobao.app1, com.taobao.app2 这两个BundleID来说，就属于同一个Vender，共享同一个IDFV的值。和IDFA不同的是，IDFV的值是一定能取到的，所以非常适合于作为内部用户行为分析的主id，来标识用户，替代OpenUDID。<br>它是iOS 6中新增的，跟advertisingIdentifier一样，该方法返回的是一个 NSUUID对象，可以获得一个UUID。如果满足条件“相同的一个程序里面-相同的vendor-相同的设备”，那么获取到的这个属性值就不会变。如果是“相同的程序-相同的设备-不同的vendor，或者是相同的程序-不同的设备-无论是否相同的vendor”这样的情况，那么这个值是不会相同的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *idfv = [[[UIDevice currentDevice] identifierForVendor] UUIDString];</div></pre></td></tr></table></figure>
+<p>#####<code>但是如果用户将属于此Vender的所有App卸载，则IDFV的值会被重置，即再重装此Vender的App，IDFV的值和之前不同。</code></p>
+<blockquote>
+<p>五、MAC Address</p>
+</blockquote>
+<h3 id="什么是MAC"><a href="#什么是MAC" class="headerlink" title="什么是MAC"></a>什么是MAC</h3><p>MAC(Medium/Media Access Control)地址，用来表示互联网上每一个站点的标识符，采用十六进制数表示，共六个字节（48位）。其中，前三个字节是由IEEE的注册管理机构 RA负责给不同厂家分配的代码(高位24位)，也称为“编制上唯一的标识符” （Organizationally Unique Identifier)，后三个字节(低位24位)由各厂家自行指派给生产的适配器接口，称为扩展标识符（唯一性）。 </p>
+<p>MAC地址在网络上用来区分设备的唯一性，接入网络的设备都有一个MAC地址，他们肯定都是不同的，是唯一的。一部iPhone上可能有多个MAC地址，包括WIFI的、SIM的等，但是iTouch和iPad上就有一个WIFI的，因此只需获取WIFI的MAC地址就好了，也就是en0的地址。<br>形象的说，MAC地址就如同我们身份证上的身份证号码，具有全球唯一性。这样就可以非常好的标识设备唯一性，类似与苹果设备的UDID号，通常的用途有：<br>1）用于一些统计与分析目的，利用用户的操作习惯和数据更好的规划产品；<br>2）作为用户ID来唯一识别用户，可以用游客身份使用app又能在服务器端保存相应的信息，省去用户名、密码等注册过程。</p>
+<h3 id="如何使用Mac地址生成设备的唯一标识呢？"><a href="#如何使用Mac地址生成设备的唯一标识呢？" class="headerlink" title="如何使用Mac地址生成设备的唯一标识呢？"></a>如何使用Mac地址生成设备的唯一标识呢？</h3><p>主要分三种：</p>
+<pre><code>1、直接使用“MAC Address” 
+2、使用“MD5(MAC Address)” 
+3、使用“MD5(Mac Address+bundle_id)”获得“机器＋应用”的唯一标识（bundle_id 是应用的唯一标识）
+</code></pre><p>iOS7之前，因为Mac地址是唯一的， 一般app开发者会采取第3种方式来识别安装对应app的设备。为什么会使用它？在iOS5之前，都是使用UDID的，后来被禁用。苹果推荐使用UUID 但是也有诸多问题，从而使用MAC地址。而MAC地址跟UDID一样，存在隐私问题，现在苹果新发布的iOS7上，如果请求Mac地址都会返回一个固定值，那么Mac Address+bundle_id这个值大家的设备都变成一致的啦，跟UDID一样相当于被禁用, 所以Mac Address 是不能够被使用为获取设备唯一标识的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">#include &lt;sys/sysctl.h&gt;</div><div class="line">#include &lt;sys/socket.h&gt;</div><div class="line">#include &lt;net/if.h&gt;</div><div class="line">#include &lt;net/if_dl.h&gt;</div><div class="line"> </div><div class="line">  int mib[6];</div><div class="line">    size_t len;</div><div class="line">    char *buf;</div><div class="line">    unsigned char *ptr;</div><div class="line">    struct if_msghdr *ifm;</div><div class="line">    struct sockaddr_dl *sdl;</div><div class="line"> </div><div class="line">    mib[0] = CTL_NET;</div><div class="line">    mib[1] = AF_ROUTE;</div><div class="line">    mib[2] = 0;</div><div class="line">    mib[3] = AF_LINK;</div><div class="line">    mib[4] = NET_RT_IFLIST;</div><div class="line"> </div><div class="line">    if ((mib[5] = if_nametoindex(&quot;en0&quot;)) == 0) &#123;</div><div class="line">        printf(&quot;Error: if_nametoindex error\n&quot;);</div><div class="line">        return NULL;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    if (sysctl(mib, 6, NULL, &amp;len, NULL, 0) &lt; 0) &#123;</div><div class="line">        printf(&quot;Error: sysctl, take 1\n&quot;);</div><div class="line">        return NULL;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    if ((buf = malloc(len)) == NULL) &#123;</div><div class="line">        printf(&quot;Could not allocate memory. error!\n&quot;);</div><div class="line">        return NULL;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    if (sysctl(mib, 6, buf, &amp;len, NULL, 0) &lt; 0) &#123;</div><div class="line">        printf(&quot;Error: sysctl, take 2&quot;);</div><div class="line">        free(buf);</div><div class="line">        return NULL;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    ifm = (struct if_msghdr *)buf;</div><div class="line">    sdl = (struct sockaddr_dl *)(ifm + 1);</div><div class="line">    ptr = (unsigned char *)LLADDR(sdl);</div><div class="line">    NSString *macStr = [NSString stringWithFormat:@&quot;%02X:%02X:%02X:%02X:%02X:%02X&quot;,*ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];</div><div class="line">    free(buf);</div></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>说了这么多, 才发现原来没有一种方法是可行的。没错, 其实自从苹果废除UDID后, 就不能达到获取设备真正的唯一标识了。因为这些方法中导致获取的唯一标示产生改变的原因, 或是重新调用方法, 或是重启设备, 或是卸载应用, 或是还原某些标识, 或者刷新系统…<br>所以, 不能达到从根本上获取唯一标识, 我们只能做到尽可能接近。下面是我用过的方法。</p>
+<h3 id="如何正确的获取设备的唯一标识"><a href="#如何正确的获取设备的唯一标识" class="headerlink" title="如何正确的获取设备的唯一标识"></a>如何正确的获取设备的唯一标识</h3><p>我用的方法是将获取的UUID永久存储在设备的KeyChain中, 这个方法在应用第一次启动时, 将获取的UUID存储进KeyChain中, 每次取的时候, 检查本地钥匙串中有没有, 如果没有则需要将获取的UUID存储进去。当你重启设备, 卸载应用再次安装,都不影响, 只是当设备刷机时, KeyChain会清空, 才会消失, 才会失效。<br>不只是这一种方法, 你也可以保存除UUID之外,其他合适的标识, 但利用KeyChain去存储标识的方式应该是最接近的。</p>
+<h2 id="重点：利用keyChain和UUID永久获得设备的唯一标识"><a href="#重点：利用keyChain和UUID永久获得设备的唯一标识" class="headerlink" title="重点：利用keyChain和UUID永久获得设备的唯一标识"></a>重点：利用keyChain和UUID永久获得设备的唯一标识</h2><h3 id="什么是keychain"><a href="#什么是keychain" class="headerlink" title="什么是keychain"></a>什么是keychain</h3><pre><code>苹果增加更安全的存储方式：Keychain（相对于NSUserDefaults数据以明文的形式保存在）
+提供了一种安全的保存私密信息（密码，序列号，证书等）的方式，
+每个iOS程序都有一个独立的keychain存储，将数据加密后存储在本地,更安全.
+当你删除APP后Keychain存储的数据不会删除，所以在重装App后，Keychain里的数据还能使用。
+从ios 3.0开始，跨程序分享keychain变得可行而NSUserDefaults存储的数据会随着APP而删掉
+</code></pre><p>话不多说，下面看看怎么用keychain方式存储UUID，达到删除应用重新安装后获取的UUID不会变（但系统reset后keychain存储的数据会消失。）<br>使用keychain请不要忘记引入Security包，引入头文件 <code>&lt;Security/Security.h&gt;</code></p>
+<h4 id="定义一个工具类用户存储用户数据，提供存、取、删三个接口。"><a href="#定义一个工具类用户存储用户数据，提供存、取、删三个接口。" class="headerlink" title="定义一个工具类用户存储用户数据，提供存、取、删三个接口。"></a>定义一个工具类用户存储用户数据，提供存、取、删三个接口。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  MXKeyChain.h</div><div class="line">//  keyChainDemo</div><div class="line">//</div><div class="line">//  Created by Henry on 2017/3/4.</div><div class="line">//  Copyright © 2017年 无届网络科技. All rights reserved.</div><div class="line">//</div><div class="line">#import &lt;Foundation/Foundation.h&gt;</div><div class="line">#import &lt;Security/Security.h&gt;</div><div class="line">@interface MXKeyChain : NSObject</div><div class="line">/**</div><div class="line"> *  存储字符串到 KeyChain</div><div class="line"> */</div><div class="line">+ (void)keyChainSaveString:(NSString *)string WithSecureKey:(NSString *)secureKey;</div><div class="line">/**</div><div class="line"> *  从 KeyChain 中读取存储的字符串</div><div class="line"> */</div><div class="line">+ (NSString *)keyChainLoadStringWithSecureKey:(NSString *)secureKey;</div><div class="line">/**</div><div class="line"> *  删除 KeyChain 信息</div><div class="line"> */</div><div class="line">+ (void)keyChainDeleteStringWithSecureKey:(NSString *)secureKey;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="用法"><a href="#用法" class="headerlink" title="用法:"></a>用法:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">//</div><div class="line">//  ViewController.m</div><div class="line">//  keyChainDemo</div><div class="line">//</div><div class="line">//  Created by Henry on 2017/3/3.</div><div class="line">//  Copyright © 2017年 无届网络科技. All rights reserved.</div><div class="line">#import &quot;ViewController.h&quot;</div><div class="line">#import &quot;MXKeyChain.h&quot;</div><div class="line">static NSString *const UUIDKEY = @&quot;UUIDKEY&quot;;</div><div class="line">@interface ViewController ()</div><div class="line">- (IBAction)loadUUID;</div><div class="line">@end</div><div class="line">@implementation ViewController</div><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    [self loadUUID];</div><div class="line">&#125;</div><div class="line">//每次卸载应用重装加载的UUID都不会变，但重置系统后就没有数据了。</div><div class="line">- (IBAction)loadUUID &#123;</div><div class="line">    NSString *uuidStr = [MXKeyChain keyChainLoadStringWithSecureKey:UUIDKEY];</div><div class="line">    if (!uuidStr.length)&#123;</div><div class="line">        uuidStr = [[NSUUID UUID] UUIDString];//此方法每次加载的UUID都不一样</div><div class="line">        [MXKeyChain keyChainSaveString:uuidStr WithSecureKey:UUIDKEY];</div><div class="line">    &#125;</div><div class="line">    NSLog(@&quot;UUID: %@&quot;,uuidStr);</div><div class="line">&#125;</div><div class="line">@end</div></pre></td></tr></table></figure>
+<h2 id="本次演示个人用的demo"><a href="#本次演示个人用的demo" class="headerlink" title="本次演示个人用的demo"></a>本次演示个人用的demo</h2><h3 id="在项目中-导入MXKeyChain-h-MXKeyChain-m调用即可"><a href="#在项目中-导入MXKeyChain-h-MXKeyChain-m调用即可" class="headerlink" title="在项目中,导入MXKeyChain.h MXKeyChain.m调用即可"></a>在项目中,导入<code>MXKeyChain.h MXKeyChain.m</code>调用即可</h3><h3 id="demo地址"><a href="#demo地址" class="headerlink" title="demo地址"></a><a href="https://github.com/Henry519/keychainDemo" target="_blank" rel="external">demo地址</a></h3>
+  </section>
+
+</article>
+<section class="read-more">
+           
+    
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">最近的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2017/06/06/iOS开发-Safari调试WebView页面/" title="iOS开发-Safari调试WebView页面">iOS开发-Safari调试WebView页面</a></h2>
+                <p class="excerpt">
+                
+                在iOS开发过程中，难免会加入html5页面来实现文章详情等等类似功能。我们都知道火狐等PC浏览器有类似firebug，审查元素等工具来调试网页样式与脚本，查看请求参数与请求头等等。在iOS开发中，这些网页检查器功能也是存在的（无论是模拟器还是真机），我们需要用到Mac自带的浏览器Safari。所以
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2017-06-06T07:13:30.000Z" class="post-list__meta--date date">2017-06-06</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+</span><a class="btn-border-small" href="/2017/06/06/iOS开发-Safari调试WebView页面/">继续阅读</a></div>
+                           
+            </div>
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2017/03/01/iOS之UI-CAShapeLayer/" title="iOS之UI-CAShapeLayer">iOS之UI-CAShapeLayer</a></h2>
+                <p class="excerpt">
+                
+                内容大纲：1. CAShapeLayer简介
+2. 贝塞尔曲线与CAShapeLayer的关系
+3. strokeStart和strokeEnd 动画
+4. 用CAShapeLayer实现进度条效果，以及更加复杂的效果
+1.CAShapeLayer简介
+CAShapeLayer继承自CALayer，
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2017-03-01T09:07:36.000Z" class="post-list__meta--date date">2017-03-01</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/iOS开发/">iOS开发</a>
+</span><a class="btn-border-small" href="/2017/03/01/iOS之UI-CAShapeLayer/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+            
+<section class="post-comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="http://yoursite.com/2017/03/06/UUID全解/" data-title="IOS开发-获取唯一设备标识的方法" data-url="http://yoursite.com/2017/03/06/UUID全解/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"tiantian419"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </span>
+    <span class="footer__copyright">
+        基于 <a href="http://hexo.io">Hexo</a> 搭建，感谢 <a href="https://pages.github.com/">GitHub Pages</a> 提供免费的托管服务
+    </span>
+    <span class="footer__copyright">
+        &copy; 2019 - 本站由 <a href="/">@Monniya</a> 创建,
+        使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">hexo-theme-new-vno</a> 主题,
+        修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+    </span>
+</footer>
+        </div>
+    </div>
+
+    
+
+     
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cc5298dc110ef2815b741ef290dee21";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    
+    </script>
+    
+</body>
+</html>
