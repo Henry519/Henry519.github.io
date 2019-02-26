@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    
+    <title>Python实践二、数据分析 | Henry的博客</title>
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta name="description" content="ios开发、iOS交流、iOS技术">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Python实践二、数据分析 | Henry的博客">
+    <meta name="twitter:description" content="ios开发、iOS交流、iOS技术">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Python实践二、数据分析 | Henry的博客">
+    <meta property="og:description" content="ios开发、iOS交流、iOS技术">
+
+    
+    <meta name="author" content="Henry">
+    
+    <link rel="stylesheet" href="/css/vno.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+
+    
+
+    <meta name="generator" content="hexo"/>
+    
+    <link rel="alternate" type="application/rss+xml" title="Henry的博客" href="/atom.xml">
+    
+
+    <link rel="canonical" href="http://yoursite.com/2018/05/26/Python实践二数据分析/"/>
+
+    
+      
+</head>
+
+<body class="home-template no-js">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <span class="mobile btn-mobile-menu">
+        <i class="fa fa-list btn-mobile-menu__icon"></i>
+        <i class="fa fa-angle-up btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+<header class="panel-cover panel-cover--collapsed" style="background-image: url(/images/background-cover-road.jpg)">
+  <div class="panel-main">
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        <a href="/" title="前往 Henry的博客 的主页"><img src="/images/avatar_dog.jpg" width="80" alt="Henry的博客 logo" class="panel-cover__logo logo" /></a>
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage for Henry的博客">Henry的博客</a></h1>
+        
+        <span class="panel-cover__subtitle panel-subtitle">有理想的人，生活总是火热的</span>
+        
+        <hr class="panel-cover__divider" />
+        <p class="panel-cover__description">欢迎来到Henry的博客，希望与您在iOS开发领域共同交流与学习</p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+
+        <div class="navigation-wrapper">
+          <div>
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+              <li class="navigation__item"><a href="/#blog" title="访问博客" class="blog-button">博客</a></li>
+            
+            </ul>
+          </nav>
+          </div>
+          <div>
+          <nav class="cover-navigation navigation--social">
+  <ul class="navigation">
+
+  <!-- Weibo-->
+  
+
+  <!-- Github -->
+  
+  <li class="navigation__item">
+    <a href="https://github.com/Henry519" title="查看我的GitHub主页" target="_blank">
+      <i class='social fa fa-github'></i>
+      <span class="label">Github</span>
+    </a>
+  </li>
+
+
+<!-- Stack Overflow -->
+        
+
+  <!-- Google Plus -->
+  
+
+<!-- Facebook -->
+
+  
+<!-- Twitter -->
+
+  
+
+  <li class="navigation__item">
+    <a href="/atom.xml" title="RSS" target="_blank">
+      <i class='social fa fa-rss'></i>
+      <span class="label">RSS</span>
+    </a>
+  </li>
+
+
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay cover-slate"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner">
+            <article class="post-container post-container--single">
+
+  <header class="post-header">
+    <div class="post-meta">
+      <time datetime="2018-05-26T03:29:33.000Z" class="post-list__meta--date date">2018-05-26</time> &#8226; <span class="post-meta__tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/Python/">Python</a>
+ </span>
+      <span class="page-pv">
+      &nbsp;阅读&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>
+      </span> 
+   
+    </div>
+    <h1 class="post-title">Python实践二、数据分析</h1>
+  </header>
+
+  <section class="post">
+    <p>写这篇文章的起因是我一个朋友发表博士论文中要对采集的数据进行分析拟合，自然就想到身为程序猿的我了，本人本着无私奉献的精神及哥们义气，就帮了这个忙啦，😁（装逼结束进入正题）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">需求一：根据公式计算MVD、MDN</div><div class="line">MND计算公式：[Σ(Bin Diameter*Num)]/Σnum</div><div class="line">MVD计算公式：ΣVolum/Σnum=4/3*pi*r^3</div><div class="line">计算结果写入Excel表中</div><div class="line">需求二：通道合并及对数正态分布拟合（这个是什么我也不懂，反正就根据公式进行拟合吧）</div></pre></td></tr></table></figure>
+<p>俗话说工欲善其事必先利其器，做事之前我们得找些高效的工具。这里我们选择Python中的结构化数据分析利器-Pandas，写入Excel时要用到xlsxwriter库，现在首先安装这两个库。我们打开PyCharm(很好用的Python解释器)点击PyCharm Community Edition -&gt; Preferences首先点击右上角箭头下拉选择Python2.7然后再按图示箭头选择</p>
+<p><img src="/2018/05/26/Python实践二数据分析/01.png" alt=""></p>
+<p><img src="/2018/05/26/Python实践二数据分析/02.png" alt=""></p>
+<p>安装完成开始写代码，首先解决需求一，先看一下数据格式</p>
+<p><img src="/2018/05/26/Python实践二数据分析/03.png" alt=""></p>
+<p>要想分析数据我们得读取数据，我们的数据格式是.csv文件，首先我们用Pandas读取数据的格式为<code>table = pd.read_csv(path,names=list(&#39;abcde&#39;),na_values = [&quot;um&quot;,&quot;(Lower)&quot;,&quot;Diff.&quot;,&quot;Volume&quot;,&quot;Number&quot;,&quot;um^3&quot;,&quot;um^2&quot;])</code>其中path为文件地址，names为读取出数据后每列的标识，因为我们的数据最多前五列有用，其他无用数据舍去，所以用abcde标识5列数据。这里要注意的是na_values参数，因为有7000个表，每个表中的数据格式有可能不一样，这里我们要过滤表中的<code>&quot;um&quot;,&quot;(Lower)&quot;,&quot;Diff.&quot;,&quot;Volume&quot;,&quot;Number&quot;,&quot;um^3&quot;,&quot;um^2&quot;</code>数据。运行程序看看读取的数据长什么样子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">                          a                     b             c        d  \</div><div class="line">0               Multisizer 3       2017-5-12 10:50           NaN      NaN   </div><div class="line">1                 File name:   DD2016Ter_10_01.#m3           NaN      NaN   </div><div class="line">2                  Group ID:             DD2016Ter           NaN      NaN   </div><div class="line">3                 Sample ID:                    10           NaN      NaN   </div><div class="line">4              Control mode:  Volumetric,  250  uL           NaN      NaN   </div><div class="line">5                  Acquired:       2017-5-12 10:49           NaN      NaN   </div><div class="line">6                 Size bins:                   300           NaN      NaN   </div><div class="line">7                       From                     1           NaN      NaN   </div><div class="line">8                         To                    30           NaN      NaN   </div><div class="line">9          Sizing threshold:                0.9995           NaN      NaN   </div><div class="line">10             Total pulses:                  7044           NaN      NaN   </div><div class="line">11       Counting threshold:                0.9995           NaN      NaN   </div><div class="line">12   Counts above threshold:                  7044           NaN      NaN   </div><div class="line">13    Coincidence corrected:                  7092           NaN      NaN   </div><div class="line">14                       NaN                   NaN           NaN      NaN   </div><div class="line">15                Bin Number                   NaN  DD2016Ter_10      NaN   </div><div class="line">16                       NaN          Bin Diameter       _01.#m3      NaN   </div><div class="line">17                       NaN                   NaN           NaN      NaN   </div><div class="line">18                       NaN                   NaN           NaN      NaN   </div><div class="line">19                         1                     1           153  81.4846   </div><div class="line">20                         2                1.0114           149  82.0997   </div><div class="line">21                         3               1.02293           136  77.5293   </div><div class="line">22                         4                1.0346           123  72.5443   </div><div class="line">23                         5               1.04639           121  73.8337   </div><div class="line">24                         6               1.05832           128  80.8072   </div><div class="line">25                         7               1.07039           121  79.0309   </div><div class="line">26                         8                1.0826           126  85.1439   </div><div class="line">27                         9               1.09494           128  89.4878</div></pre></td></tr></table></figure>
+<p><strong>what‘s the fuck!</strong> 这是什么乱七八糟的东西，没办法源数据上面就是一大坨没用的描述，既然如此那我们在对数据进行裁剪一下吧这里要提到Pandas对数据切片语法了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#使用标签选取数据：</div><div class="line">df.loc[行标签,列标签]</div><div class="line">df.loc[&apos;a&apos;:&apos;b&apos;]#选取ab两行数据</div><div class="line">df.loc[:,&apos;one&apos;]#选取one列的数据</div><div class="line">#使用位置选取数据：</div><div class="line">df.iloc[行位置,列位置]</div><div class="line">df.iloc[1,1]#选取第二行，第二列的值，返回的为单个值</div><div class="line">df.iloc[0,2],:]#选取第一行及第三行的数据</div><div class="line">df.iloc[0:2,:]#选取第一行到第三行（不包含）的数据</div><div class="line">df.iloc[:,1]#选取所有记录的第一列的值，返回的为一个Series</div><div class="line">df.iloc[1,:]#选取第一行数据，返回的为一个Series</div></pre></td></tr></table></figure>
+<p>我们执行<code>data = table.iloc[17:(len(table) - 1), 1:4]</code>表示我们读取数据的第17行开始到表的倒数第一行，第二列到第第四列，看看切片后的数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">           b    c         d</div><div class="line">17       NaN  NaN       NaN</div><div class="line">18       NaN  NaN       NaN</div><div class="line">19         1  153   81.4846</div><div class="line">20    1.0114  149   82.0997</div><div class="line">21   1.02293  136   77.5293</div><div class="line">22    1.0346  123   72.5443</div><div class="line">23   1.04639  121   73.8337</div><div class="line">24   1.05832  128   80.8072</div><div class="line">25   1.07039  121   79.0309</div></pre></td></tr></table></figure>
+<p>第17，18行没有有用的数据为什么不从19行开始读呢？这个就是因为她给的数据格式不统一！不统一!其他文件里17、18行是有可能有数据的。接下来我们要对缺失数据进行处理<code>data = data.dropna(how=&#39;all&#39;)</code>这句是去除全部是缺失数据的行，是全部，如果一行中只有一个缺失数据是不会被去除的，所以我们再加上一句<code>data = data.fillna(0).astype(float)</code>这句是用0替换掉表中的缺失数据，然后将数据全部转换为float格式，不转换是文本格式没法计算的。最后我们再给data起个别名，便于记忆<code>data.columns = [&#39;BinDiameter&#39;, &#39;Num&#39;, &#39;Volum&#39;]</code>现在我们再看下数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> 	BinDiameter    Num     Volum</div><div class="line">19       1.00000  153.0   81.4846</div><div class="line">20       1.01140  149.0   82.0997</div><div class="line">21       1.02293  136.0   77.5293</div><div class="line">22       1.03460  123.0   72.5443</div><div class="line">23       1.04639  121.0   73.8337</div><div class="line">24       1.05832  128.0   80.8072</div></pre></td></tr></table></figure>
+<p>大功告成有木有！这数据是不是很赏心悦目呀！接下来我们终于可以计算MVD，MND了，喜大普奔😂</p>
+<p>根据上面的公式我们定义两个方法分别求出MVD，MND</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">def mvd(data):</div><div class="line">    # 球体积=ΣVolum/Σnum=4/3*pi()*r^3反推出d大小</div><div class="line">    return ((data[&apos;Volum&apos;].sum() / data[&apos;Num&apos;].sum()) / ((4/3) * math.pi)) **(1.0/3)</div><div class="line">def mnd(data):</div><div class="line">    # [Σ(Bin Diameter*Num)]/ΣNum</div><div class="line">    # Num列数据求和</div><div class="line">    Num = data[&apos;Num&apos;].sum()</div><div class="line">    print(&quot;Num和为 %f&quot; % (Num))</div><div class="line">    # Bin Diameter*Num</div><div class="line">    bn = data[&quot;BinDiameter&quot;] * data[&quot;Num&quot;]</div><div class="line">    print(&quot;BinDiameter*Num的和= %f&quot; % (bn.sum()))</div><div class="line">    return (bn.sum() / Num)</div></pre></td></tr></table></figure>
+<p>解释：<code>data[&#39;Volum&#39;].sum()</code>表示Volum列所有数据的求和。<code>data[&quot;BinDiameter&quot;] * data[&quot;Num&quot;]</code>表示BinDiameter列数据对应于Num列数据相乘，一一对应乘积的关系，得出一列数据bn,<code>bn.sum() / data[&#39;Num&#39;].sum()</code>即MND,就是这么简单暴力的计算。</p>
+<p>最后我们要将数据写入Excel中，再定义一个方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">def writerWithExcel(mnd,mvd,indexList):</div><div class="line">    df = pd.DataFrame(&#123;&apos;MND&apos;: mnd, &apos;MVD&apos;: mvd&#125;,index=indexList)</div><div class="line">    writer = pd.ExcelWriter(&apos;simple.xlsx&apos;, engine=&apos;xlsxwriter&apos;)</div><div class="line">    df.to_excel(writer, sheet_name=&apos;Sheet1&apos;)</div><div class="line">    writer.save()</div></pre></td></tr></table></figure>
+<p>解释：拿到mnd,mvd的值我们先建立DataFrame对象<code>df = pd.DataFrame({&#39;MND&#39;: mnd, &#39;MVD&#39;: mvd},index=indexList)</code>其中index表示每行的标识，这里我们要传入每个样本的名称，然后调用ExcelWriter传入文件名称写入Excel保存。</p>
+<p>最后我们看下结果</p>
+<p><img src="/2018/05/26/Python实践二数据分析/04.png" alt=""></p>
+<p>单个文件处理完成，剩下的就是for循环处理7000个文件了，<strong><a href="https://github.com/Henry519/PythonDataProcess" target="_blank" rel="external">源代码</a></strong>已上传至GitHub。至此需求一已经完成，接下来处理需求二。</p>
+<blockquote>
+<p>###需求二</p>
+</blockquote>
+<p>在需求一的处理好的数据基础上首先按要求进行通道合并</p>
+<p><img src="/2018/05/26/Python实践二数据分析/05.png" alt=""></p>
+<p>首先的按要求进行数据切片，按6行一组切片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#通道合并</div><div class="line">def calculateWithPerSixRow(data):</div><div class="line">    # 获取第一行的行标签，即切片数据的起始行数</div><div class="line">    startIndex = data.index[0]</div><div class="line">    for x in range(len(data)):</div><div class="line">        if (x % 6 == 0):#对6进行取余</div><div class="line">            endIndex = (startIndex + 6) - 1</div><div class="line">            if endIndex &gt; data.index[-1]:#如果最后一组的末尾行数超过了data的总行数，那此组数据舍去</div><div class="line">                pass</div><div class="line">            else:</div><div class="line">                print &quot;分组数据为%d--------%d行&quot; % (startIndex, endIndex)</div><div class="line">                startIndex = endIndex + 1</div></pre></td></tr></table></figure>
+<p>打印一下分组的起始行标识</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">分组数据为19--------24行</div><div class="line">分组数据为25--------30行</div><div class="line">分组数据为31--------36行</div><div class="line">分组数据为37--------42行</div><div class="line">分组数据为43--------48行</div><div class="line">分组数据为49--------54行</div><div class="line">分组数据为55--------60行</div><div class="line">分组数据为61--------66行</div><div class="line">分组数据为67--------72行</div><div class="line">分组数据为73--------78行</div><div class="line">分组数据为79--------84行</div><div class="line">分组数据为85--------90行</div><div class="line">分组数据为91--------96行</div><div class="line">分组数据为97--------102行</div><div class="line">分组数据为103--------108行</div><div class="line">分组数据为109--------114行</div><div class="line">分组数据为115--------120行</div><div class="line">分组数据为121--------126行</div><div class="line">分组数据为127--------132行</div><div class="line">分组数据为133--------138行</div><div class="line">分组数据为139--------144行</div><div class="line">分组数据为145--------150行</div><div class="line">分组数据为151--------156行</div><div class="line">分组数据为157--------162行</div><div class="line">分组数据为163--------168行</div><div class="line">分组数据为169--------174行</div><div class="line">分组数据为175--------180行</div><div class="line">分组数据为181--------186行</div><div class="line">分组数据为187--------192行</div><div class="line">分组数据为193--------198行</div><div class="line">分组数据为199--------204行</div><div class="line">分组数据为205--------210行</div><div class="line">分组数据为211--------216行</div><div class="line">分组数据为217--------222行</div><div class="line">分组数据为223--------228行</div><div class="line">分组数据为229--------234行</div><div class="line">分组数据为235--------240行</div><div class="line">分组数据为241--------246行</div><div class="line">分组数据为247--------252行</div><div class="line">分组数据为253--------258行</div><div class="line">分组数据为259--------264行</div><div class="line">分组数据为265--------270行</div><div class="line">分组数据为271--------276行</div><div class="line">分组数据为277--------282行</div><div class="line">分组数据为283--------288行</div><div class="line">分组数据为289--------294行</div><div class="line">分组数据为295--------300行</div><div class="line">分组数据为301--------306行</div><div class="line">分组数据为307--------312行</div><div class="line">分组数据为313--------318行</div></pre></td></tr></table></figure>
+<p>接下来进行数据切片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#根据起始index取出对应startIndex到endIndex的行数的数据</div><div class="line">tempData = data.loc[startIndex:endIndex]</div><div class="line">#取出每组数据第一行的值tempData.values是一个二维数组</div><div class="line">firstValue = tempData.values[0][0]</div></pre></td></tr></table></figure>
+<p>我们来看一下tempData.values的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">分组数据为19--------24行</div><div class="line">[[   1.       153.        81.4846 ]</div><div class="line"> [   1.0114   149.        82.0997 ]</div><div class="line"> [   1.02293  136.        77.5293 ]</div><div class="line"> [   1.0346   123.        72.5443 ]</div><div class="line"> [   1.04639  121.        73.8337 ]</div><div class="line"> [   1.05832  128.        80.8072 ]]</div><div class="line">分组数据为25--------30行</div><div class="line">[[   1.07039  121.        79.0309 ]</div><div class="line"> [   1.0826   126.        85.1439 ]</div><div class="line"> [   1.09494  128.        89.4878 ]</div><div class="line"> [   1.10742  127.        91.8605 ]</div><div class="line"> [   1.12005  109.        81.5686 ]</div><div class="line"> [   1.13282  122.        94.4555 ]]</div></pre></td></tr></table></figure>
+<p>接下来我们把每组数据的值进行计算后存入数组中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">newBD.append(firstValue)#每组数据第一行的值</div><div class="line">newNum.append(tempData[&apos;Num&apos;].sum())#每组数据Num列的求和</div><div class="line">newVolume.append(tempData[&apos;Volum&apos;].sum())#每组数据Volum列的求和</div></pre></td></tr></table></figure>
+<p>最后我们再次构造一个DataFrame对象<code>df = pd.DataFrame({&#39;BD&#39;: newBD, &#39;NMU&#39;: newNum, &#39;VOL&#39;: newVolume})</code>打印一下看看结果是不是预期的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"> 			BD    NMU        VOL</div><div class="line">0    1.00000  810.0   468.2988</div><div class="line">1    1.07039  733.0   521.5472</div><div class="line">2    1.14574  629.0   547.3834</div><div class="line">3    1.22639  553.0   593.1900</div><div class="line">4    1.31271  523.0   686.8520</div><div class="line">5    1.40512  458.0   735.2066</div><div class="line">6    1.50402  416.0   820.1590</div><div class="line">7    1.60989  377.0   912.7970</div><div class="line">8    1.72321  355.0  1059.7630</div><div class="line">9    1.84451  288.0  1041.7950</div></pre></td></tr></table></figure>
+<p>嗯，数据对的，至此通道合并完成。接下来模拟对数正太分别图，我们先看看公式</p>
+<p><img src="/2018/05/26/Python实践二数据分析/06.png" alt=""></p>
+<p>这里是朋友给的坐标求解方法</p>
+<p><img src="/2018/05/26/Python实践二数据分析/07.png" alt=""></p>
+<p>其实按公式计算最后拟合结果也是正确的，比这个手动计算微分简单的多，后面我会讲解两种方式拟合</p>
+<p>首先我们采用第一种方式：即求得dV/dlnd,这个是y值，x值即为通道合并好的BD的值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">def draw(df):</div><div class="line">    # 计算lnd,即对BD列所有的数据应用logBD函数（此函数返回BD列数据以e为底的对数值）</div><div class="line">    lnBD = df.BD.apply(logBD)</div><div class="line">    # 计算Δlnd</div><div class="line">    lndList = []</div><div class="line">    for x in range(0, len(lnBD) - 1):</div><div class="line">        y = x + 1</div><div class="line">        tempNumb = lnBD[y] - lnBD[x]</div><div class="line">        lndList.append(tempNumb)</div><div class="line">    lndList.append(lndList[0])</div><div class="line">    # print df[&apos;VOL&apos;].values</div><div class="line">    # 计算ΔdV / Δlnd</div><div class="line">    they = df[&apos;VOL&apos;].values / lndList</div><div class="line">    thex = df[&apos;BD&apos;].values</div><div class="line">    #画图</div><div class="line">    pl.scatter(thex, they)</div><div class="line">    plt.show()</div></pre></td></tr></table></figure>
+<p>计算出x、y的值后，我们绘制出散点图看看是什么形状</p>
+<p><img src="/2018/05/26/Python实践二数据分析/08.png" alt=""></p>
+<p>接下来我们采用第二种方式来计算：根据上面的公式来求x，y值，看看有什么差别。首先我们得先求出公式里所需要的标准差跟期望值，然后带入函数求y值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#这里求标准差跟期望值是根据合并后BinDiameter的值来进行计算的</div><div class="line">mean = df[&apos;BD&apos;].mean()#期望值</div><div class="line">std = df[&apos;BD&apos;].std()#标准差</div></pre></td></tr></table></figure>
+<p>我们定义上面的对数正太分布函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#正态分布函数</div><div class="line">def normfun(x,y,mu,sigma):</div><div class="line">    #x为d,y为Vtotal,mu为BinDiameter的期望值,sigma为BinDiameter的方差</div><div class="line">    pdf = np.exp((((np.log(x) - np.log(mu))/np.log(sigma)) **2) * (-1/2))</div><div class="line">    a =  y/(np.log(sigma) * np.sqrt(2*np.pi))</div><div class="line">    return pdf * a</div></pre></td></tr></table></figure>
+<p>求出y值后我们再次绘制下散点图</p>
+<p><img src="/2018/05/26/Python实践二数据分析/09.png" alt=""></p>
+<p>结果分布趋势相同</p>
+<p>最后根据点进行图像拟合存储图片</p>
+<p><img src="/2018/05/26/Python实践二数据分析/10.png" alt=""></p>
+<p>##<a href="https://github.com/Henry519/PythonDataProcess" target="_blank" rel="external">本文源码</a></p>
+
+  </section>
+
+</article>
+<section class="read-more">
+           
+    
+        
+        
+               
+            <div class="read-more-item">
+                <span class="read-more-item-dim">更早的文章</span>
+                <h2 class="post-list__post-title post-title"><a href="/2018/03/26/Python应用一将网页转换为pdf电子书/" title="Python实践一、将网页转换为pdf电子书">Python实践一、将网页转换为pdf电子书</a></h2>
+                <p class="excerpt">
+                
+                本人是个”收集狂”(不要想歪了哈，我只是喜欢收藏技术贴)，遇到好的东西就喜欢收藏或记录下来，尤其是好的技术文章或者工具。这里就要提到廖雪峰老师的官方网站了，廖老师写的Python、JavaScript、Git教程真心好呀，每每都要去逛逛。于是就有了今天这个需求，把廖老师的教程由网页转为PDF电子书，
+                &hellip;
+                </p>
+                <div class="post-list__meta"><time datetime="2018-03-26T06:06:27.000Z" class="post-list__meta--date date">2018-03-26</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;
+  <a class="tag-link" href="/tags/Python/">Python</a>
+</span><a class="btn-border-small" href="/2018/03/26/Python应用一将网页转换为pdf电子书/">继续阅读</a></div>
+                       
+            </div>
+        
+     
+   
+   
+  
+</section>
+
+            
+<section class="post-comments">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="http://yoursite.com/2018/05/26/Python实践二数据分析/" data-title="Python实践二、数据分析" data-url="http://yoursite.com/2018/05/26/Python实践二数据分析/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+  var duoshuoQuery = {short_name:"tiantian419"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+</section>
+
+
+            <footer class="footer">
+    <span class="footer__copyright">
+        本站点采用 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </span>
+    <span class="footer__copyright">
+        基于 <a href="http://hexo.io">Hexo</a> 搭建，感谢 <a href="https://pages.github.com/">GitHub Pages</a> 提供免费的托管服务
+    </span>
+    <span class="footer__copyright">
+        &copy; 2019 - 本站由 <a href="/">@Monniya</a> 创建,
+        使用 <a href="https://github.com/monniya/hexo-theme-new-vno ">hexo-theme-new-vno</a> 主题,
+        修改自 <a href="https://github.com/lenbo-ma/hexo-theme-vno" target="_blank">Vno</a>, 原创出自<a href="http://github.com/onevcat/vno" target="_blank">onevcat</a>
+    </span>
+</footer>
+        </div>
+    </div>
+
+    
+
+     
+    
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?9cc5298dc110ef2815b741ef290dee21";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+    
+    </script>
+    
+</body>
+</html>
