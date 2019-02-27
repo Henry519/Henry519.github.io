@@ -240,8 +240,7 @@
 <p>据猜测，因为上传到 AppStore 的包苹果会重新对内容加密，原来的本地私钥签名就没有用了，需要重新签名，从 AppStore 下载的包苹果也并不打算控制它的有效期，不需要内置一个 <code>embedded.mobileprovision</code>去做校验，直接在苹果用后台的私钥重新签名，iOS 安装时用本地公钥验证 App 签名就可以了。</p>
 <p>那为什么发布 AppStore 的包还是要跟开发版一样搞各种证书和 <code>Provisioning Profile</code>？猜测因为苹果想做统一管理，<code>Provisioning Profile</code> 里包含一些权限控制，AppID 的检验等，苹果不想在上传 AppStore 包时重新用另一种协议做一遍这些验证，就不如统一把这部分放在 <code>Provisioning Profile</code> 里，上传 AppStore 时只要用同样的流程验证这个 <code>Provisioning Profile</code> 是否合法就可以了。</p>
 <p>所以 App 上传到 AppStore 后，就跟你的 证书 / Provisioning Profile 都没有关系了，无论他们是否过期或被废除，都不会影响 AppStore 上的安装包。</p>
-<p>到这里 iOS 签名机制的原理和主流程大致说完了，希望能对理解苹果签名和排查日常签名问题有所帮助。</p>
-<h3 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h3><p>最后，感谢各位能改耐心看完，也希望能够对大家带来帮助。同时也感谢<a href="http://www.cocoachina.com/ios/20170602/19427.html" target="_blank" rel="external">原作者</a>的文章。本篇文章主要是为了做笔记。</p>
+<p>到这里 iOS 签名机制的原理和主流程大致说完了，希望能对理解苹果签名和排查日常签名问题有所帮助。<br>最后，感谢各位能改耐心看完，也希望能够对大家带来帮助。同时也感谢<a href="http://www.cocoachina.com/ios/20170602/19427.html" target="_blank" rel="external">原作者</a>的文章。本篇文章主要是为了做笔记。</p>
 
   </section>
 
@@ -257,8 +256,8 @@
                 <h2 class="post-list__post-title post-title"><a href="/2018/05/11/Python实践二数据分析/" title="Python实践二、数据分析">Python实践二、数据分析</a></h2>
                 <p class="excerpt">
                 
-                写这篇文章的起因是我一个朋友发表博士论文中要对采集的数据进行分析拟合，自然就想到身为程序猿的我了，本人本着无私奉献的精神及哥们义气，就帮了这个忙啦，😁（装逼结束进入正题）
-12345需求一：根据公式计算MVD、MDNMND计算公式：[Σ(Bin Diameter*Num)]/ΣnumMVD计算公式
+                写这篇文章的起因是我一个朋友的女友发表博士论文中要对采集的数据进行分析拟合，刚好这段时间工作不忙，在研究Python，所以就去折腾折腾。下面是两个需求：
+12345需求一：根据公式计算MVD、MDNMND计算公式：[Σ(Bin Diameter*Num)]/ΣnumMVD计算公式：ΣVolum/Σn
                 &hellip;
                 </p>
                 <div class="post-list__meta"><time datetime="2018-05-11T03:29:33.000Z" class="post-list__meta--date date">2018-05-11</time> &#8226; <span class="post-list__meta--tags tags">于&nbsp;

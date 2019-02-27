@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-26T13:44:30.367Z</updated>
+  <updated>2019-02-27T03:07:04.780Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2018/07/12/iOS%E5%BC%80%E5%8F%91-App%E7%AD%BE%E5%90%8D%E7%9A%84%E5%8E%9F%E7%90%86/"/>
     <id>http://yoursite.com/2018/07/12/iOS开发-App签名的原理/</id>
     <published>2018-07-12T07:10:20.000Z</published>
-    <updated>2019-02-26T13:44:30.367Z</updated>
+    <updated>2019-02-27T03:07:04.780Z</updated>
     
     <content type="html"><![CDATA[<p>iOS 签名机制挺复杂，各种证书，Provisioning Profile，entitlements，CertificateSigningRequest，p12，AppID，概念一堆，也很容易出错，本文尝试从原理出发，一步步推出为什么会有这么多概念，希望能有助于理解 iOS App 签名的原理和流程。</p>
 <blockquote>
@@ -118,8 +118,7 @@
 <p>据猜测，因为上传到 AppStore 的包苹果会重新对内容加密，原来的本地私钥签名就没有用了，需要重新签名，从 AppStore 下载的包苹果也并不打算控制它的有效期，不需要内置一个 <code>embedded.mobileprovision</code>去做校验，直接在苹果用后台的私钥重新签名，iOS 安装时用本地公钥验证 App 签名就可以了。</p>
 <p>那为什么发布 AppStore 的包还是要跟开发版一样搞各种证书和 <code>Provisioning Profile</code>？猜测因为苹果想做统一管理，<code>Provisioning Profile</code> 里包含一些权限控制，AppID 的检验等，苹果不想在上传 AppStore 包时重新用另一种协议做一遍这些验证，就不如统一把这部分放在 <code>Provisioning Profile</code> 里，上传 AppStore 时只要用同样的流程验证这个 <code>Provisioning Profile</code> 是否合法就可以了。</p>
 <p>所以 App 上传到 AppStore 后，就跟你的 证书 / Provisioning Profile 都没有关系了，无论他们是否过期或被废除，都不会影响 AppStore 上的安装包。</p>
-<p>到这里 iOS 签名机制的原理和主流程大致说完了，希望能对理解苹果签名和排查日常签名问题有所帮助。</p>
-<h3 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h3><p>最后，感谢各位能改耐心看完，也希望能够对大家带来帮助。同时也感谢<a href="http://www.cocoachina.com/ios/20170602/19427.html" target="_blank" rel="external">原作者</a>的文章。本篇文章主要是为了做笔记。</p>
+<p>到这里 iOS 签名机制的原理和主流程大致说完了，希望能对理解苹果签名和排查日常签名问题有所帮助。<br>最后，感谢各位能改耐心看完，也希望能够对大家带来帮助。同时也感谢<a href="http://www.cocoachina.com/ios/20170602/19427.html" target="_blank" rel="external">原作者</a>的文章。本篇文章主要是为了做笔记。</p>
 ]]></content>
     
     <summary type="html">
@@ -138,9 +137,9 @@
     <link href="http://yoursite.com/2018/05/11/Python%E5%AE%9E%E8%B7%B5%E4%BA%8C%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     <id>http://yoursite.com/2018/05/11/Python实践二数据分析/</id>
     <published>2018-05-11T03:29:33.000Z</published>
-    <updated>2019-02-26T13:37:21.132Z</updated>
+    <updated>2019-02-27T01:26:17.638Z</updated>
     
-    <content type="html"><![CDATA[<p>写这篇文章的起因是我一个朋友发表博士论文中要对采集的数据进行分析拟合，自然就想到身为程序猿的我了，本人本着无私奉献的精神及哥们义气，就帮了这个忙啦，😁（装逼结束进入正题）</p>
+    <content type="html"><![CDATA[<p>写这篇文章的起因是我一个朋友的女友发表博士论文中要对采集的数据进行分析拟合，刚好这段时间工作不忙，在研究Python，所以就去折腾折腾。下面是两个需求：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">需求一：根据公式计算MVD、MDN</div><div class="line">MND计算公式：[Σ(Bin Diameter*Num)]/Σnum</div><div class="line">MVD计算公式：ΣVolum/Σnum=4/3*pi*r^3</div><div class="line">计算结果写入Excel表中</div><div class="line">需求二：通道合并及对数正态分布拟合（这个是什么我也不懂，反正就根据公式进行拟合吧）</div></pre></td></tr></table></figure>
 <p>俗话说工欲善其事必先利其器，做事之前我们得找些高效的工具。这里我们选择Python中的结构化数据分析利器-Pandas，写入Excel时要用到xlsxwriter库，现在首先安装这两个库。我们打开PyCharm(很好用的Python解释器)点击PyCharm Community Edition -&gt; Preferences首先点击右上角箭头下拉选择Python2.7然后再按图示箭头选择</p>
 <p><img src="/2018/05/11/Python实践二数据分析/01.png" alt=""></p>
@@ -203,8 +202,8 @@
     
     <summary type="html">
     
-      &lt;p&gt;写这篇文章的起因是我一个朋友发表博士论文中要对采集的数据进行分析拟合，自然就想到身为程序猿的我了，本人本着无私奉献的精神及哥们义气，就帮了这个忙啦，😁（装逼结束进入正题）&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+      &lt;p&gt;写这篇文章的起因是我一个朋友的女友发表博士论文中要对采集的数据进行分析拟合，刚好这段时间工作不忙，在研究Python，所以就去折腾折腾。下面是两个需求：&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gu
     
     </summary>
     
